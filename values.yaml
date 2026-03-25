@@ -1,0 +1,25 @@
+---
+# SPDX-License-Identifier: AGPL-3.0-or-later
+sites-faciles:
+  name: sites-faciles
+  replicaCount: 1
+  image:
+    repository: ghcr.io/numerique-gouv/sites-faciles
+    tag: "main"
+    pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+
+postgres:
+  replicaCount: 1
+  image:
+    repository: docker.io/postgres
+    tag: "18"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 5432
+  persistence:
+    size: 1Gi
+    storageClass: "standard"
+...
