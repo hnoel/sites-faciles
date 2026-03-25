@@ -1,0 +1,39 @@
+---
+name: Publishing Helm Charts to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'charts/**'
+
+jobs:
+  release-oci:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+
+      - name: Login to GHCR
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Package and push charts
+        run: |
+          for chart in charts/*/; do
+            CHART_NAME=$(basename "$chart")
+            CHART_VERSION=$(yq '.version' "$chart/Chart.yaml")
+
+            echo "Packaging $CHART_NAME version $CHART_VERSION"
+            helm package "$chart"
+
+            echo "Pushing to GHCR"
+            helm push "${CHART_NAME}-${CHART_VERSION}.tgz" oci://ghcr.io/${{ github.repository_owner }}/charts
+          done
+...
