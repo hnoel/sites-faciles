@@ -1,5 +1,5 @@
 ---
-name: Release Helm Charts
+name: Release Helm Charts (GitHub Pages)
 
 on:
   workflow_dispatch: {}
@@ -16,7 +16,7 @@ jobs:
       pages: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -26,7 +26,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
+        uses: helm/chart-releaser-action@v1
         with:
           version: 'v1.7.0'
           skip_packaging: true
