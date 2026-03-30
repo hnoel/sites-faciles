@@ -1,5 +1,5 @@
 ---
-name: Publishing Helm Charts to GitHub Pages
+name: Publishing Helm Charts (GitHub Registry)
 
 on:
   workflow_dispatch: {}
@@ -16,7 +16,7 @@ jobs:
       packages: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Set up Helm
         uses: azure/setup-helm@v4
