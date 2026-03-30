@@ -1,0 +1,45 @@
+apiVersion: v1
+entries:
+  postgres:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2026-03-30T23:17:38.790904393+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 76fcb70d06f8d72f668725c40b62842e1e0786fe78cbc7853c32b2bd0d6136bd
+    name: postgres
+    type: application
+    urls:
+    - https://github.com/hnoel/sites-faciles/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
+    version: 0.1.0
+  sites-faciles:
+  - apiVersion: v2
+    appVersion: 2.5.3
+    created: "2026-03-30T23:17:38.968570864+02:00"
+    dependencies:
+    - name: sites-faciles
+      repository: file://charts/sites-faciles
+      version: 0.1.0
+    - name: postgres
+      repository: file://charts/postgres
+      version: 0.1.0
+    description: A Helm chart for deploying french government website framwork 'sites-faciles'
+    digest: d7f483f9a1afb21771e3a0efb85c4c3aeb567ac4860ed4cf8a4b0c0edd41b690
+    home: https://github.com/hnoel/sites-faciles
+    icon: https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/favicon/favicon.svg
+    keywords:
+    - sites-faciles
+    - python
+    - Django
+    - Wagtail
+    - postgresql
+    maintainers:
+    - email: hnoel@users.noreply.github.com
+      name: henri NOËL
+    name: sites-faciles
+    sources:
+    - https://github.com/numerique-gouv/sites-faciles
+    type: application
+    urls:
+    - https://github.com/hnoel/sites-faciles/releases/download/sites-faciles-0.0.1/sites-faciles-0.0.1.tgz
+    version: 0.0.1
+generated: "2026-03-30T23:17:38.968580255+02:00"
