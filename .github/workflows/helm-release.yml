@@ -28,14 +28,8 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1
         with:
-          version: 'v1.7.0'
-          skip_packaging: false
-          skip_existing: false
-          skip_upload: false
-          mark_as_latest: true
           charts_dir: 'charts'
           config: './.github/configs/cr.yaml'
-          packages_with_index: true
           pages_branch: gh-pages
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
