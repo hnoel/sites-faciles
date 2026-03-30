@@ -1,0 +1,30 @@
+---
+# SPDX-License-Identifier: AGPL-3.0-or-later
+apiVersion: v2
+name: sites-faciles
+version: 0.0.1
+description: A Helm chart for deploying french government website framwork 'sites-faciles'
+type: application
+keywords:
+  - sites-faciles
+  - python
+  - Django 
+  - Wagtail
+  - postgresql
+home: https://github.com/hnoel/sites-faciles
+sources:
+  - https://github.com/numerique-gouv/sites-faciles
+dependencies:
+  - name: sites-faciles
+    version: "0.1.0"
+    repository: "file://charts/sites-faciles"
+  - name: postgres
+    version: "0.1.0"
+    repository: "file://charts/postgres"
+maintainers:
+  - name: henri NOËL
+    email: hnoel@users.noreply.github.com
+icon: https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/favicon/favicon.svg
+appVersion: "2.5.3"
+deprecated: false
+...
