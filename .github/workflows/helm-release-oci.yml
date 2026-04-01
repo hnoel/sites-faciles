@@ -14,7 +14,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-      id-token: write
+      id-token: write  # needed for signing the images with GitHub OIDC Token
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -23,7 +23,9 @@ jobs:
         uses: azure/setup-helm@v4
 
       - name: Install Cosign
-        uses: sigstore/cosign-installer@v4
+        uses: sigstore/cosign-installer@v4.1.0
+      - name: Check install!
+        run: cosign version
 
       - name: Login to GHCR
         run: |
@@ -39,9 +41,10 @@ jobs:
             helm package "$chart"
 
             echo "Pushing to GHCR"
-            helm push "${CHART_NAME}-${CHART_VERSION}.tgz" oci://ghcr.io/${{ github.repository_owner }}/charts
+            helm push "${CHART_NAME}-${CHART_VERSION}.tgz" oci://ghcr.io/${{ github.repository_owner }}/charts > helm.push.txt
+            CHART_DIGEST=$(yq '.Digest' "./helm.push.txt")
 
-            echo "Signing with Cosign"
-            cosign sign --yes ghcr.io/${{ github.repository_owner }}/charts/${CHART_NAME}:${CHART_VERSION}
+            echo "Sign the images with GitHub OIDC Token"
+            cosign sign --yes ghcr.io/${{ github.repository_owner }}/charts/${CHART_NAME}:${CHART_VERSION}@${DIGEST}
           done
 ...
