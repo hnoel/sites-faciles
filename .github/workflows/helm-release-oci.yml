@@ -42,11 +42,12 @@ jobs:
 
             echo "Pushing to GHCR"
             {
-              cat << EOF
+              echo 'CHART_DIGEST<<EOF'
               helm push "${CHART_NAME}-${CHART_VERSION}.tgz" oci://ghcr.io/${{ github.repository_owner }}/sites-faciles | tee -a "$GITHUB_OUTPUT"
               echo EOF
             } > ./digest.out
             cat ./digest.out
+            echo -e "$CHART_DIGEST"
             C_DIGEST=$(yq '.Digest' ./digest.out)
             echo "$C_DIGEST"
 
