@@ -45,6 +45,6 @@ jobs:
 
             echo "Sign the images with GitHub OIDC Token"
             CHART_DIGEST=$(helm show values oci://ghcr.io/hnoel/sites-faciles/${CHART_NAME} --version ${CHART_VERSION} 2>&1 >/dev/null | yq .Digest)
-            cosign sign --yes ghcr.io/${{ github.repository_owner }}/sites-faciles/${CHART_NAME}:${CHART_VERSION}@${CHART_DIGEST}
+            cosign sign --yes "ghcr.io/${{ github.repository_owner }}/sites-faciles/${CHART_NAME}:${CHART_VERSION}@${CHART_DIGEST}"
           done
 ...
