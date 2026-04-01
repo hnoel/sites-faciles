@@ -41,10 +41,10 @@ jobs:
             helm package "$chart"
 
             echo "Pushing to GHCR"
-            helm push "${CHART_NAME}-${CHART_VERSION}.tgz" oci://ghcr.io/${{ github.repository_owner }}/sites-faciles > helm.push.txt
-            CHART_DIGEST=$(yq '.Digest' "./helm.push.txt")
+            helm push "${CHART_NAME}-${CHART_VERSION}.tgz" oci://ghcr.io/${{ github.repository_owner }}/sites-faciles
 
             echo "Sign the images with GitHub OIDC Token"
-            cosign sign --yes ghcr.io/${{ github.repository_owner }}/charts/${CHART_NAME}:${CHART_VERSION}@${CHART_DIGEST}
+            CHART_DIGEST=$(helm show values oci://ghcr.io/hnoel/sites-faciles/${CHART_NAME} --version ${CHART_VERSION} 2>&1 >/dev/null | yq .Digest)
+            cosign sign --yes "ghcr.io/${{ github.repository_owner }}/sites-faciles/${CHART_NAME}:${CHART_VERSION}@${CHART_DIGEST}"
           done
 ...
