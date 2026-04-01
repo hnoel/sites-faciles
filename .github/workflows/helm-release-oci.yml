@@ -45,6 +45,6 @@ jobs:
             CHART_DIGEST=$(yq '.Digest' "./helm.push.txt")
 
             echo "Sign the images with GitHub OIDC Token"
-            cosign sign --yes ghcr.io/${{ github.repository_owner }}/charts/${CHART_NAME}:${CHART_VERSION}@${DIGEST}
+            cosign sign --yes ghcr.io/${{ github.repository_owner }}/charts/${CHART_NAME}:${CHART_VERSION}@${CHART_DIGEST}
           done
 ...
