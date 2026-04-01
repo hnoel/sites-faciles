@@ -41,9 +41,13 @@ jobs:
             helm package "$chart"
 
             echo "Pushing to GHCR"
-            helm push "${CHART_NAME}-${CHART_VERSION}.tgz" oci://ghcr.io/${{ github.repository_owner }}/sites-faciles | tee -a "$DIGESTT"
-            echo -e "$DIGESTT"
-            C_DIGEST=$(yq '.Digest' "$DIGESTT")
+            {
+              cat << EOF
+              helm push "${CHART_NAME}-${CHART_VERSION}.tgz" oci://ghcr.io/${{ github.repository_owner }}/sites-faciles | tee -a "$GITHUB_OUTPUT"
+              echo EOF
+            } > ./digest.out
+            cat ./digest.out
+            C_DIGEST=$(yq '.Digest' ./digest.out)
             echo "$C_DIGEST"
 
             echo "Sign the images with GitHub OIDC Token"
