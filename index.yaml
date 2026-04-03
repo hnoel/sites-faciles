@@ -14,6 +14,16 @@ entries:
   sites-faciles:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2026-04-03T13:14:30.475071582Z"
+    description: A Helm chart for Kubernetes
+    digest: d77aaff127a1f0a09e4ec739beb50a368021cfbe52e9917708363ae4db1ac307
+    name: sites-faciles
+    type: application
+    urls:
+    - https://github.com/hnoel/sites-faciles/releases/download/sites-faciles-0.1.1/sites-faciles-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2026-04-03T12:54:36.425614275Z"
     description: A Helm chart for Kubernetes
     digest: f38c1b8865b46d75cfb4ccb3d7ab92ee9e07150ab3c5a78cbb903537bd6c35e9
@@ -52,4 +62,4 @@ entries:
     urls:
     - https://github.com/hnoel/sites-faciles/releases/download/sites-faciles-0.0.1/sites-faciles-0.0.1.tgz
     version: 0.0.1
-generated: "2026-04-03T12:54:36.425620626Z"
+generated: "2026-04-03T13:14:30.475083074Z"
