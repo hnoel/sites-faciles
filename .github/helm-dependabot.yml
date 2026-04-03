@@ -1,0 +1,11 @@
+---
+# Custom configuration for Helm dependencies
+# Note: Dependabot doesn't natively support Helm,
+# so use Renovate or custom workflows insteadversion: 2
+updates:
+  # Update GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+...
